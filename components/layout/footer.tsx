@@ -109,12 +109,15 @@ export default async function Footer() {
               &copy; {copyrightDate} {copyrightName}
               {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
             </p>
-            <div className="flex gap-6">
+            <div className="flex flex-wrap gap-6">
               <Link href="/privacy" className="hover:text-[#00d4ff] transition">
                 Privacy Policy
               </Link>
               <Link href="/terms" className="hover:text-[#00d4ff] transition">
                 Terms of Service
+              </Link>
+              <Link href="/returns" className="hover:text-[#00d4ff] transition">
+                Returns Policy
               </Link>
             </div>
           </div>
