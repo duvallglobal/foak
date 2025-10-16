@@ -57,7 +57,13 @@ This document outlines the remaining customization tasks after initial branding 
 - Text: Black/White
 - Accents: Teal-300, Pink-500
 
-**Recommended Color Updates for Antique/Vintage Store:**
+**Recommended Color Updates for Resale Store:**
+
+Consider colors that convey:
+- Treasure/discovery (warm golds, warm grays)
+- Trustworthiness (deep blues, neutrals)
+- Diversity/variety (complementary accent colors)
+- Value (earth tones, wood tones)
 
 1. **Update Tailwind Config:**
    ```ts
@@ -66,9 +72,9 @@ This document outlines the remaining customization tasks after initial branding 
      extend: {
        colors: {
          'brand': {
-           'primary': '#8B4513',    // Saddle Brown
-           'secondary': '#D4AF37',  // Gold
-           'accent': '#6B4423',     // Darker Brown
+           'primary': '#4B5563',    // Warm gray-blue
+           'secondary': '#D4AF37',  // Gold (treasure/value)
+           'accent': '#8B7355',     // Warm brown (earth tones)
          },
          'warm': {
            '50': '#FFF8F3',
@@ -81,8 +87,8 @@ This document outlines the remaining customization tasks after initial branding 
    ```
 
 2. **Update in `app/layout.tsx`:**
-   - Change selection colors from teal/pink
-   - Update body class colors to match your palette
+   - Change selection colors to match your palette
+   - Update body class colors to reflect brand
 
 3. **Update component colors:**
    - Search for hardcoded color classes
@@ -101,8 +107,10 @@ This document outlines the remaining customization tasks after initial branding 
 
 **Customization Ideas:**
 
+Create a welcoming homepage that highlights the treasure-hunting experience:
+
 ```tsx
-// Add hero section with your store tagline
+// Add hero section with store tagline
 export default function HomePage() {
   return (
     <>
@@ -112,9 +120,37 @@ export default function HomePage() {
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Finds of all Kinds - South
           </h1>
-          <p className="text-xl md:text-2xl opacity-90">
-            Discover unique treasures and curated vintage finds
+          <p className="text-xl md:text-2xl opacity-90 mb-4">
+            Discover unique furniture, clothing, home goods, and more
           </p>
+          <p className="text-lg opacity-80">
+            Sourced from auctioned storage units - new treasures every week!
+          </p>
+        </div>
+      </section>
+      
+      {/* Featured Section */}
+      <section className="py-12 px-4">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">What You'll Find Here</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center">
+              <div className="text-4xl mb-2">🪑</div>
+              <p className="font-semibold">Furniture</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-2">👕</div>
+              <p className="font-semibold">Clothing</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-2">🏠</div>
+              <p className="font-semibold">Home Goods</p>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl mb-2">✨</div>
+              <p className="font-semibold">And More!</p>
+            </div>
+          </div>
         </div>
       </section>
       
@@ -132,17 +168,21 @@ export default function HomePage() {
 **File:** `components/layout/footer.tsx`
 
 **Add to Footer:**
+- Store name and tagline
 - Store address (South location)
 - Phone number
 - Email
 - Hours of operation
-- Social media links
+- Social media links (Instagram/TikTok great for showing new finds!)
+- Links to: About, Contact, Privacy Policy, Terms, Returns
 - Payment methods accepted
+- "New inventory weekly" or similar messaging
 
 ```tsx
 // Example footer structure
 const storeInfo = {
   name: 'Finds of all Kinds - South',
+  tagline: 'Unique Finds from Auctioned Storage Units',
   address: '123 Main Street, South City, ST 12345',
   phone: '(555) 123-4567',
   email: 'info@findsofallkinds.com',
@@ -150,8 +190,13 @@ const storeInfo = {
   social: {
     instagram: 'https://instagram.com/findsofallkinds',
     facebook: 'https://facebook.com/findsofallkinds',
-    pinterest: 'https://pinterest.com/findsofallkinds'
-  }
+    tiktok: 'https://tiktok.com/@findsofallkinds'
+  },
+  callouts: [
+    'New Inventory Weekly!',
+    'Shop Sustainably',
+    'Furniture • Clothing • Home Goods & More'
+  ]
 };
 ```
 
@@ -181,11 +226,17 @@ const storeInfo = {
 - `components/product/product-description.tsx`
 
 **Customize:**
-- Product image galleries with proper aspect ratios
-- Description formatting for vintage items
-- Condition information display
-- Origin/story of items (if available)
-- Care instructions for vintage pieces
+- Product image galleries with multiple angles
+- Clear description formatting including:
+  - Item type and category (furniture, clothing, home goods, etc.)
+  - Condition/quality assessment (like new, gently used, fair, etc.)
+  - Dimensions for furniture and larger items
+  - Material/fabric information where applicable
+  - Any unique characteristics or stories
+  - Care instructions (especially for clothing and delicate items)
+- Size/fit information for clothing items
+- Assembly requirements or condition notes for furniture
+- Highlight unique or special finds
 
 ## Phase 3: Additional Pages (Tasks 12-14)
 
@@ -202,16 +253,34 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8">Our Story</h1>
+      <h1 className="text-4xl font-bold mb-8">About Finds of all Kinds - South</h1>
       
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Welcome to Finds of all Kinds - South</h2>
+        <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
         <p className="text-lg leading-relaxed mb-4">
-          {/* Your store's story */}
+          Finds of all Kinds - South is your destination for unique, diverse treasures sourced from auctioned storage units. 
+          We specialize in furniture, home goods, clothing, and an eclectic mix of items across all ages and styles.
+        </p>
+        <p className="text-lg leading-relaxed mb-4">
+          Every item in our store has its own story, and we're passionate about giving these finds a second life. 
+          From mid-century furniture to contemporary clothing, vintage home décor to practical everyday items, 
+          you'll discover something special every time you shop with us.
         </p>
       </section>
       
-      {/* Add more sections: Mission, Values, History, etc. */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Why Shop With Us?</h2>
+        <ul className="text-lg space-y-3 list-disc list-inside">
+          <li>Curated selection from carefully sourced auctioned storage units</li>
+          <li>Diverse inventory: furniture, home goods, clothing, and more</li>
+          <li>Great prices on quality items</li>
+          <li>Sustainable shopping - giving items a second chance</li>
+          <li>New inventory regularly as we source new storage units</li>
+          <li>Support local - shop at our South location</li>
+        </ul>
+      </section>
+      
+      {/* Add more sections as needed */}
     </main>
   );
 }

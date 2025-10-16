@@ -4,7 +4,7 @@ import Footer from 'components/layout/footer';
 
 export const metadata = {
   description:
-    'Discover unique finds and curated treasures at Finds of all Kinds - South. Your destination for exceptional home goods, vintage items, and more.',
+    'Shop unique finds at Finds of all Kinds - South. Discover furniture, home goods, clothing, and more from our curated collection of auctioned storage unit items.',
   openGraph: {
     type: 'website'
   }
