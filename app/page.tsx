@@ -4,7 +4,7 @@ import Footer from 'components/layout/footer';
 
 export const metadata = {
   description:
-    'High-performance ecommerce store built with Next.js, Vercel, and Shopify.',
+    'Discover unique finds and curated treasures at Finds of all Kinds - South. Your destination for exceptional home goods, vintage items, and more.',
   openGraph: {
     type: 'website'
   }
