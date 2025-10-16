@@ -10,60 +10,114 @@ const { COMPANY_NAME, SITE_NAME } = process.env;
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
-  const skeleton = 'w-full h-6 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700';
+  const skeleton = 'w-full h-6 animate-pulse rounded-sm bg-neutral-700';
   const menu = await getMenu('next-js-frontend-footer-menu');
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
-        <div>
-          <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
-            <LogoSquare size="sm" />
-            <span className="uppercase">{SITE_NAME}</span>
-          </Link>
-        </div>
-        <Suspense
-          fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
-              <div className={skeleton} />
+    <footer className="text-sm text-neutral-400 bg-[#1a1a1a] border-t border-neutral-700">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-16 md:px-4 min-[1320px]:px-0">
+        {/* Main footer content */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand section */}
+          <div className="md:col-span-1">
+            <Link className="flex items-center gap-2 text-white mb-4 hover:text-[#00d4ff] transition" href="/">
+              <LogoSquare size="sm" />
+              <span className="uppercase font-bold">{SITE_NAME}</span>
+            </Link>
+            <p className="text-neutral-400 text-sm">Discover unique treasures from auctioned storage units.</p>
+          </div>
+
+          {/* Store info section */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Store</h3>
+            <div className="space-y-3 text-sm text-neutral-400">
+              <div>
+                <p className="text-neutral-300 font-medium">Address</p>
+                <p>West Point, GA</p>
+              </div>
+              <div>
+                <p className="text-neutral-300 font-medium">Hours</p>
+                <p>24/7 HOA</p>
+              </div>
+              <div>
+                <p className="text-neutral-300 font-medium">Contact</p>
+                <a href="tel:7065852195" className="hover:text-[#00d4ff] transition">
+                  (706) 585-2195
+                </a>
+              </div>
             </div>
-          }
-        >
-          <FooterMenu menu={menu} />
-        </Suspense>
-        <div className="md:ml-auto">
-          <a
-            className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
-            aria-label="Deploy on Vercel"
-            href="https://vercel.com/templates/next.js/nextjs-commerce"
-          >
-            <span className="px-3">▲</span>
-            <hr className="h-full border-r border-neutral-200 dark:border-neutral-700" />
-            <span className="px-3">Deploy</span>
-          </a>
+          </div>
+
+          {/* Links section */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+            <div className="space-y-2 text-sm">
+              <Suspense
+                fallback={
+                  <div className="flex flex-col gap-2">
+                    <div className={skeleton} />
+                    <div className={skeleton} />
+                  </div>
+                }
+              >
+                <FooterMenu menu={menu} />
+              </Suspense>
+              <Link href="/about" className="text-neutral-400 hover:text-[#00d4ff] transition block">
+                About Us
+              </Link>
+              <Link href="/contact" className="text-neutral-400 hover:text-[#00d4ff] transition block">
+                Contact
+              </Link>
+            </div>
+          </div>
+
+          {/* Social section */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Follow Us</h3>
+            <div className="space-y-3 text-sm">
+              <a
+                href="https://www.instagram.com/findsofallkinds.south/"
+                className="text-neutral-400 hover:text-[#00d4ff] transition flex items-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>📷 Instagram</span>
+              </a>
+              <a
+                href="https://www.facebook.com/findsofallkinds.south/"
+                className="text-neutral-400 hover:text-[#00d4ff] transition flex items-center gap-2"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>👍 Facebook</span>
+              </a>
+              <a
+                href="mailto:info@findsofallkinds.store"
+                className="text-neutral-400 hover:text-[#00d4ff] transition flex items-center gap-2"
+              >
+                <span>✉️ Email</span>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
-          <p>
-            &copy; {copyrightDate} {copyrightName}
-            {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
-          </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
-          <p>
-            <a href="https://github.com/vercel/commerce">View the source</a>
-          </p>
-          <p className="md:ml-auto">
-            <a href="https://vercel.com" className="text-black dark:text-white">
-              Created by ▲ Vercel
-            </a>
-          </p>
+
+        {/* Bottom footer */}
+        <div className="border-t border-neutral-700 pt-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-neutral-400">
+            <p>
+              &copy; {copyrightDate} {copyrightName}
+              {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
+            </p>
+            <div className="flex gap-6">
+              <Link href="/privacy" className="hover:text-[#00d4ff] transition">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-[#00d4ff] transition">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

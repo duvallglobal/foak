@@ -9,14 +9,23 @@ import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
 
+// Custom navigation items for the store
+const customNavItems = [
+  { title: 'Shop', path: '/search' },
+  { title: 'About', path: '/about' },
+  { title: 'Contact', path: '/contact' }
+];
+
 export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
+  // Use custom nav items, fallback to menu if empty
+  const navItems = customNavItems.length > 0 ? customNavItems : menu;
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <nav className="relative flex items-center justify-between p-4 lg:px-6 bg-[#1a1a1a] border-b border-neutral-700">
       <div className="block flex-none md:hidden">
         <Suspense fallback={null}>
-          <MobileMenu menu={menu} />
+          <MobileMenu menu={navItems} />
         </Suspense>
       </div>
       <div className="flex w-full items-center">
@@ -27,18 +36,18 @@ export async function Navbar() {
             className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
           >
             <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
+            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block text-white hover:text-[#00d4ff] transition">
               {SITE_NAME}
             </div>
           </Link>
-          {menu.length ? (
+          {navItems.length ? (
             <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
+              {navItems.map((item: Menu) => (
                 <li key={item.title}>
                   <Link
                     href={item.path}
                     prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
+                    className="text-neutral-400 underline-offset-4 hover:text-[#00d4ff] hover:underline transition"
                   >
                     {item.title}
                   </Link>

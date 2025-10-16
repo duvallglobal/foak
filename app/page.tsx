@@ -1,6 +1,6 @@
 import { Carousel } from 'components/carousel';
-import { HeroBanner } from 'components/hero-banner';
 import { ThreeItemGrid } from 'components/grid/three-items';
+import { HeroBanner } from 'components/hero-banner';
 import Footer from 'components/layout/footer';
 
 export const metadata = {
