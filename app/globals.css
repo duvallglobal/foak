@@ -33,26 +33,48 @@ html, body {
 .spotlight-item {
   position: relative;
   z-index: 10;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  perspective: 1000px;
 }
 
 .spotlight-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+  transform: translateY(-6px) scale(1.02) translateZ(0);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.2);
 }
 
 /* Product cards with teal accent on hover */
 .product-card {
-  background-color: #252525;
-  border-radius: 0.5rem;
+  background: rgba(37, 37, 37, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
   overflow: hidden;
-  border: 1px solid #404040;
-  transition: all 0.3s;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  transform: translateZ(0);
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .product-card:hover {
-  border-color: #00d4ff;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2), inset 0 0 20px rgba(0, 212, 255, 0.05);
+  transform: translateY(-4px) translateZ(0);
+  background: rgba(37, 37, 37, 0.6);
+}
+
+.product-card:hover::before {
+  opacity: 1;
 }
 
 .product-image {
@@ -66,19 +88,43 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Accent button styling */
+/* Accent button styling with glow effects */
 .btn-accent {
-  background-color: #00d4ff;
+  background: linear-gradient(135deg, #00d4ff 0%, #00a8cc 100%);
   color: #000;
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s;
+  font-weight: 700;
+  padding: 1rem 2.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
+}
+
+.btn-accent::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #00d4ff, #33e0ff, #00a8cc);
+  border-radius: 0.75rem;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
 }
 
 .btn-accent:hover {
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-  background-color: #33e0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 212, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #33e0ff 0%, #00d4ff 100%);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 212, 255, 0.3);
 }
 
 /* Focus states */
@@ -87,6 +133,50 @@ input:focus-visible,
 button:focus-visible {
   outline: 2px solid #00d4ff;
   outline-offset: 2px;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+/* Glass morphism overlay effect */
+.glass-effect {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.glass-effect:hover {
+  background: rgba(26, 26, 26, 0.8);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+/* 3D card effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-3d:hover {
+  transform: rotateX(5deg) rotateY(5deg) translateZ(10px);
+}
+
+/* Glowing border effect */
+.glow-border {
+  position: relative;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  overflow: hidden;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  animation: shimmer-glow 2s infinite;
+}
+
+@keyframes shimmer-glow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {

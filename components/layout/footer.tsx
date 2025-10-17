@@ -16,32 +16,32 @@ export default async function Footer() {
 
   return (
     <footer className="text-sm text-neutral-400 bg-[#1a1a1a] border-t border-neutral-700">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-16 md:px-4 min-[1320px]:px-0">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-12 md:py-16 md:px-4 min-[1320px]:px-0">
         {/* Main footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand section */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 space-y-2">
             <Link className="flex items-center gap-2 text-white mb-4 hover:text-[#00d4ff] transition" href="/">
               <LogoSquare size="sm" />
-              <span className="uppercase font-bold">{SITE_NAME}</span>
+              <span className="uppercase font-bold text-xs sm:text-sm">{SITE_NAME}</span>
             </Link>
-            <p className="text-neutral-400 text-sm">Discover unique treasures from auctioned storage units.</p>
+            <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed">Treasure hunting made simple. Uncommon finds, unexpected value—right here in West Point.</p>
           </div>
 
           {/* Store info section */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Store</h3>
-            <div className="space-y-3 text-sm text-neutral-400">
+          <div className="space-y-4">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wide">Store</h3>
+            <div className="space-y-2 text-xs sm:text-sm text-neutral-400">
               <div>
-                <p className="text-neutral-300 font-medium">Address</p>
+                <p className="text-neutral-300 font-medium mb-1">Address</p>
                 <p>West Point, GA</p>
               </div>
               <div>
-                <p className="text-neutral-300 font-medium">Hours</p>
+                <p className="text-neutral-300 font-medium mb-1">Hours</p>
                 <p>24/7 HOA</p>
               </div>
               <div>
-                <p className="text-neutral-300 font-medium">Contact</p>
+                <p className="text-neutral-300 font-medium mb-1">Contact</p>
                 <a href="tel:7065852195" className="hover:text-[#00d4ff] transition">
                   (706) 585-2195
                 </a>
@@ -50,9 +50,9 @@ export default async function Footer() {
           </div>
 
           {/* Links section */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <div className="space-y-2 text-sm">
+          <div className="space-y-4">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wide">Quick Links</h3>
+            <div className="space-y-2 text-xs sm:text-sm">
               <Suspense
                 fallback={
                   <div className="flex flex-col gap-2">
@@ -73,9 +73,9 @@ export default async function Footer() {
           </div>
 
           {/* Social section */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Follow Us</h3>
-            <div className="space-y-3 text-sm">
+          <div className="space-y-4">
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wide">Follow Us</h3>
+            <div className="space-y-2 text-xs sm:text-sm">
               <a
                 href="https://www.instagram.com/findsofallkinds.south/"
                 className="text-neutral-400 hover:text-[#00d4ff] transition flex items-center gap-2"
@@ -103,13 +103,13 @@ export default async function Footer() {
         </div>
 
         {/* Bottom footer */}
-        <div className="border-t border-neutral-700 pt-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-neutral-400">
-            <p>
+        <div className="border-t border-neutral-700 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-xs sm:text-sm text-neutral-400">
+            <p className="whitespace-nowrap">
               &copy; {copyrightDate} {copyrightName}
               {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
             </p>
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-4 sm:gap-6">
               <Link href="/privacy" className="hover:text-[#00d4ff] transition">
                 Privacy Policy
               </Link>
