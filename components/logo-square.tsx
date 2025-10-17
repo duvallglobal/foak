@@ -20,10 +20,10 @@ export default function LogoSquare({ size }: { size?: 'sm' | undefined }) {
     );
   }
 
-  // Large version for navbar - no box, just logo
+  // Large version for navbar - no box, just logo, responsive sizing
   return (
     <div className="flex flex-none items-center justify-center transition-all duration-300">
-      <LogoIcon className="h-[48px] w-[48px] hover:opacity-80 transition-opacity" />
+      <LogoIcon className="h-[40px] w-[40px] sm:h-[48px] sm:w-[48px] md:h-[56px] md:w-[56px] lg:h-[64px] lg:w-[64px] hover:opacity-80 transition-opacity" />
     </div>
   );
 }
