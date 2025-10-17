@@ -1,16 +1,20 @@
+import Image from 'next/image';
 import clsx from 'clsx';
+import brandLogo from './brand-logo.png';
 
-export default function LogoIcon(props: React.ComponentProps<'svg'>) {
+export default function LogoIcon(props: React.ComponentProps<'div'>) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label={`${process.env.SITE_NAME} logo`}
-      viewBox="0 0 32 28"
-      {...props}
-      className={clsx('h-4 w-4 fill-[#00d4ff] transition-all duration-300', props.className)}
+    <div
+      className={clsx('relative h-8 w-8 flex items-center justify-center transition-all duration-300', props.className)}
     >
-      <path d="M21.5758 9.75769L16 0L0 28H11.6255L21.5758 9.75769Z" />
-      <path d="M26.2381 17.9167L20.7382 28H32L26.2381 17.9167Z" />
-    </svg>
+      <Image
+        src={brandLogo}
+        alt={`${process.env.SITE_NAME} logo`}
+        width={32}
+        height={32}
+        priority
+        className="w-full h-full object-contain"
+      />
+    </div>
   );
 }
