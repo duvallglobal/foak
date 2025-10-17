@@ -18,7 +18,7 @@ export async function FeaturedCollections() {
           <p className="text-neutral-400 text-sm md:text-base">Browse our curated collections of amazing finds</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
           {featuredCollections.map(async (collection) => {
             const products = await getCollectionProducts({
               collection: collection.handle
@@ -31,9 +31,9 @@ export async function FeaturedCollections() {
               <Link
                 key={collection.handle}
                 href={`/search/${collection.handle}`}
-                className="group relative overflow-hidden rounded-lg border border-neutral-700 transition-all duration-300 hover:border-[#00d4ff] hover:shadow-lg hover:shadow-[#00d4ff]/20"
+                className="group relative overflow-hidden rounded-lg border border-neutral-700 transition-all duration-300 hover:border-[#00d4ff] hover:shadow-lg hover:shadow-[#00d4ff]/20 aspect-square"
               >
-                <div className="aspect-square overflow-hidden bg-neutral-800">
+                <div className="w-full h-full overflow-hidden bg-neutral-800">
                   {featuredProduct.featuredImage && (
                     <GridTileImage
                       alt={collection.title}
@@ -43,10 +43,10 @@ export async function FeaturedCollections() {
                     />
                   )}
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
-                  <div className="w-full">
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{collection.title}</h3>
-                    <p className="text-sm text-neutral-300">{products.length} items</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col items-end justify-end p-2 sm:p-3">
+                  <div className="w-full text-right">
+                    <h3 className="text-xs sm:text-sm font-bold text-white mb-0.5 line-clamp-2">{collection.title}</h3>
+                    <p className="text-xs text-neutral-300">{products.length} items</p>
                   </div>
                 </div>
               </Link>
