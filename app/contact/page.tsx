@@ -44,10 +44,13 @@ export default function ContactPage() {
                   <span className="text-2xl">🕐</span> Hours
                 </h3>
                 <p className="text-neutral-400">
-                  24/7 HOA
+                  Monday - Sunday
+                </p>
+                <p className="text-neutral-400">
+                  7:00 AM - 9:00 PM
                 </p>
                 <p className="text-sm text-neutral-500 mt-2">
-                  We're here around the clock for treasure hunting enthusiasts!
+                  Open every day for your treasure hunting adventures!
                 </p>
               </div>
 
@@ -158,14 +161,14 @@ export default function ContactPage() {
               <div>
                 <h3 className="font-semibold text-[#00d4ff] mb-2">Can I visit the store in person?</h3>
                 <p className="text-neutral-400">
-                  Absolutely! We're located in West Point, GA and open 24/7 for HOA. Come explore our treasure trove of finds anytime!
+                  Yes! We're open Monday through Sunday from 7:00 AM to 9:00 PM. Visit us in West Point, GA to browse our collection and pick up any items you've purchased online.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-[#00d4ff] mb-2">Do you ship items?</h3>
                 <p className="text-neutral-400">
-                  Yes! We offer shipping on selected items. Check our product pages for shipping availability and rates, or contact us for custom shipping quotes on larger items.
+                  Yes, we offer shipping on selected items. You can also pick up your purchases locally at our store during business hours (7 AM - 9 PM, Monday - Sunday). Contact us for custom shipping quotes on larger items.
                 </p>
               </div>
 
