@@ -1,4 +1,5 @@
 import { Carousel } from 'components/carousel';
+import ErrorBoundary from 'components/error-boundary';
 import { FeaturedCollections } from 'components/featured-collections';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import { HeroBanner } from 'components/hero-banner';
@@ -19,9 +20,11 @@ export default function HomePage() {
       <HeroBanner />
       
       {/* Featured Collections by Category */}
-      <Suspense fallback={<div className="h-96 bg-[#1a1a1a]" />}>
-        <FeaturedCollections />
-      </Suspense>
+      <ErrorBoundary componentName="FeaturedCollections">
+        <Suspense fallback={<div className="h-96 bg-[#1a1a1a]" />}>
+          <FeaturedCollections />
+        </Suspense>
+      </ErrorBoundary>
 
       {/* Featured Finds */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -29,12 +32,16 @@ export default function HomePage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Latest Treasures</h2>
           <p className="text-neutral-400">New items added weekly from auctioned storage units</p>
         </div>
-        <ThreeItemGrid />
+        <ErrorBoundary componentName="ThreeItemGrid">
+          <ThreeItemGrid />
+        </ErrorBoundary>
       </section>
 
       {/* Carousel */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
-        <Carousel />
+        <ErrorBoundary componentName="Carousel">
+          <Carousel />
+        </ErrorBoundary>
       </section>
 
       <Footer />

@@ -1,4 +1,6 @@
 import { CartProvider } from 'components/cart/cart-context';
+import ClientOnly from 'components/client-only';
+import ErrorBoundary from 'components/error-boundary';
 import { Navbar } from 'components/layout/navbar';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
@@ -31,16 +33,22 @@ export default async function RootLayout({
   const cart = getCart();
 
   return (
-    <html lang="en" className={GeistSans.variable}>
+    <html lang="en" className={GeistSans.variable} suppressHydrationWarning>
       <body className="bg-[#1a1a1a] text-neutral-100 selection:bg-[#00d4ff] selection:text-black">
-        <CartProvider cartPromise={cart}>
-          <Navbar />
-          <main>
-            {children}
-            <Toaster closeButton />
-            <WelcomeToast />
-          </main>
-        </CartProvider>
+        <ErrorBoundary componentName="CartProvider">
+          <CartProvider cartPromise={cart}>
+            <ErrorBoundary componentName="Navbar">
+              <Navbar />
+            </ErrorBoundary>
+            <main>
+              {children}
+              <ClientOnly>
+                <Toaster closeButton />
+                <WelcomeToast />
+              </ClientOnly>
+            </main>
+          </CartProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

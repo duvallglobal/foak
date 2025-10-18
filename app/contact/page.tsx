@@ -1,3 +1,4 @@
+import ContactForm from 'components/contact-form';
 import Link from 'next/link';
 
 export const metadata = {
@@ -83,73 +84,7 @@ export default function ContactPage() {
             <div className="space-y-8">
               <h2 className="text-2xl font-bold text-white">Send Us a Message</h2>
               
-              <form className="bg-[#1a1a1a] p-6 rounded-lg border border-neutral-700 space-y-5">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-2 bg-[#2a2a2a] border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-[#00d4ff] focus:ring-1 focus:ring-[#00d4ff] transition"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-2 bg-[#2a2a2a] border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-[#00d4ff] focus:ring-1 focus:ring-[#00d4ff] transition"
-                    placeholder="your@email.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-neutral-300 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    className="w-full px-4 py-2 bg-[#2a2a2a] border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-[#00d4ff] focus:ring-1 focus:ring-[#00d4ff] transition"
-                    placeholder="How can we help?"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-neutral-300 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    className="w-full px-4 py-2 bg-[#2a2a2a] border border-neutral-600 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-[#00d4ff] focus:ring-1 focus:ring-[#00d4ff] transition resize-none"
-                    placeholder="Tell us what's on your mind..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#00d4ff] text-black font-bold py-2 rounded-lg hover:bg-[#33e0ff] transition-all shadow-lg hover:shadow-xl"
-                >
-                  Send Message
-                </button>
-
-                <p className="text-xs text-neutral-500 text-center">
-                  We'll get back to you as soon as possible!
-                </p>
-              </form>
+              <ContactForm />
             </div>
           </div>
 

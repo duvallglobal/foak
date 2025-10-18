@@ -6,6 +6,7 @@ This store uses React Server Components, Server Actions, `Suspense`, `useOptimis
 
 ## About Finds of all Kinds - South
 
+
 We specialize in unique, diverse finds sourced from auctioned storage units. Our inventory includes furniture, home goods, clothing, and an eclectic mix of items across all ages and styles. Every piece tells a story, and you never know what treasure you'll discover!
 
 **Location:** South  

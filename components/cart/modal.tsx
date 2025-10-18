@@ -3,6 +3,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import ErrorBoundary from 'components/error-boundary';
 import LoadingDots from 'components/loading-dots';
 import Price from 'components/price';
 import { DEFAULT_OPTION } from 'lib/constants';
@@ -90,15 +91,16 @@ export default function CartModal() {
                   </p>
                 </div>
               ) : (
-                <div className="flex h-full flex-col justify-between overflow-hidden p-1">
-                  <ul className="grow overflow-auto py-4">
-                    {cart.lines
-                      .sort((a, b) =>
-                        a.merchandise.product.title.localeCompare(
-                          b.merchandise.product.title
+                <ErrorBoundary componentName="CartItems">
+                  <div className="flex h-full flex-col justify-between overflow-hidden p-1">
+                    <ul className="grow overflow-auto py-4">
+                      {cart.lines
+                        .sort((a, b) =>
+                          a.merchandise.product.title.localeCompare(
+                            b.merchandise.product.title
+                          )
                         )
-                      )
-                      .map((item, i) => {
+                        .map((item, i) => {
                         const merchandiseSearchParams =
                           {} as MerchandiseSearchParams;
 
@@ -197,7 +199,7 @@ export default function CartModal() {
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
                       <p>Taxes</p>
                       <Price
-                        className="text-right text-base text-black dark:text-white"
+                        className="text-right text-base text-neutral-900 dark:text-neutral-100"
                         amount={cart.cost.totalTaxAmount.amount}
                         currencyCode={cart.cost.totalTaxAmount.currencyCode}
                       />
@@ -209,7 +211,7 @@ export default function CartModal() {
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                       <p>Total</p>
                       <Price
-                        className="text-right text-base text-black dark:text-white"
+                        className="text-right text-base text-neutral-900 dark:text-neutral-100"
                         amount={cart.cost.totalAmount.amount}
                         currencyCode={cart.cost.totalAmount.currencyCode}
                       />
@@ -218,7 +220,8 @@ export default function CartModal() {
                   <form action={redirectToCheckout}>
                     <CheckoutButton />
                   </form>
-                </div>
+                  </div>
+                </ErrorBoundary>
               )}
             </Dialog.Panel>
           </Transition.Child>
@@ -230,7 +233,7 @@ export default function CartModal() {
 
 function CloseCart({ className }: { className?: string }) {
   return (
-    <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
+    <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-neutral-900 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-800">
       <XMarkIcon
         className={clsx(
           'h-6 transition-all ease-in-out hover:scale-110',
@@ -250,7 +253,7 @@ function CheckoutButton() {
       type="submit"
       disabled={pending}
     >
-      {pending ? <LoadingDots className="bg-white" /> : 'Proceed to Checkout'}
+      {pending ? <LoadingDots className="bg-white dark:bg-black" /> : 'Proceed to Checkout'}
     </button>
   );
 }

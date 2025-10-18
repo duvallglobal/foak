@@ -1,2 +1,5 @@
 onlyBuiltDependencies:
+  - '@sentry-internal/node-cpu-profiler'
+  - '@sentry/cli'
   - sharp
+  - unrs-resolver
