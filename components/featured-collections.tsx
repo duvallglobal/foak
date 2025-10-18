@@ -30,9 +30,10 @@ export async function FeaturedCollections() {
       })
     );
 
-    // Filter out collections without products
+    // Filter out collections without products and ensure type safety
     const validCollections = collectionsWithProducts.filter(
-      (item) => item && item.featuredProduct
+      (item): item is { collection: any; products: any[]; featuredProduct: any } => 
+        item !== null && item.featuredProduct !== undefined
     );
 
     return (
