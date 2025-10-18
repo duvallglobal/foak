@@ -3,31 +3,48 @@ import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 
 export async function FeaturedCollections() {
-  const collections = await getCollections();
-  
-  // Filter out the "All" collection and take first 4-6 collections
-  const featuredCollections = collections
-    .filter(collection => collection.handle !== '' && collection.title !== 'All')
-    .slice(0, 6);
+  try {
+    const collections = await getCollections();
+    
+    // Filter out the "All" collection and take first 4-6 collections
+    const featuredCollections = collections
+      .filter(collection => collection.handle !== '' && collection.title !== 'All')
+      .slice(0, 6);
 
-  return (
-    <section className="w-full bg-[#1a1a1a]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-8 md:mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Shop By Category</h2>
-          <p className="text-neutral-400 text-sm md:text-base">Browse our curated collections of amazing finds</p>
-        </div>
+    // Fetch products for each collection
+    const collectionsWithProducts = await Promise.all(
+      featuredCollections.map(async (collection) => {
+        try {
+          const products = await getCollectionProducts({
+            collection: collection.handle
+          });
+          return {
+            collection,
+            products,
+            featuredProduct: products[0]
+          };
+        } catch (error) {
+          console.error(`Error fetching products for collection ${collection.handle}:`, error);
+          return null;
+        }
+      })
+    );
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
-          {featuredCollections.map(async (collection) => {
-            const products = await getCollectionProducts({
-              collection: collection.handle
-            });
-            const featuredProduct = products[0];
+    // Filter out collections without products
+    const validCollections = collectionsWithProducts.filter(
+      (item) => item && item.featuredProduct
+    );
 
-            if (!featuredProduct) return null;
+    return (
+      <section className="w-full bg-[#1a1a1a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Shop By Category</h2>
+            <p className="text-neutral-400 text-sm md:text-base">Browse our curated collections of amazing finds</p>
+          </div>
 
-            return (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
+            {validCollections.map(({ collection, products, featuredProduct }) => (
               <Link
                 key={collection.handle}
                 href={`/search/${collection.handle}`}
@@ -50,10 +67,27 @@ export async function FeaturedCollections() {
                   </div>
                 </div>
               </Link>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  } catch (error) {
+    console.error('Error in FeaturedCollections:', error);
+    return (
+      <section className="w-full bg-[#1a1a1a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Shop By Category</h2>
+            <p className="text-neutral-400 text-sm md:text-base">Browse our curated collections of amazing finds</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
+            <div className="text-neutral-400 text-sm col-span-full text-center py-12">
+              Collections coming soon...
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 }

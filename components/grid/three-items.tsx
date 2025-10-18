@@ -1,5 +1,5 @@
 import { GridTileImage } from 'components/grid/tile';
-import { getCollectionProducts } from 'lib/shopify';
+import { getCollectionProducts, getProducts } from 'lib/shopify';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 
@@ -42,20 +42,61 @@ function ThreeItemGridItem({
 }
 
 export async function ThreeItemGrid() {
-  // Collections that start with `hidden-*` are hidden from the search page.
-  const homepageItems = await getCollectionProducts({
-    collection: 'hidden-homepage-featured-items'
-  });
+  try {
+    // Try to get products from the hidden collection first, fall back to regular products
+    let homepageItems;
+    
+    try {
+      // Collections that start with `hidden-*` are hidden from the search page.
+      homepageItems = await getCollectionProducts({
+        collection: 'hidden-homepage-featured-items'
+      });
+    } catch (error) {
+      console.warn('Featured items collection not found, using regular products');
+      // Fallback to getting any products
+      const allProducts = await getProducts({});
+      homepageItems = allProducts;
+    }
 
-  if (!homepageItems[0] || !homepageItems[1] || !homepageItems[2]) return null;
+    // Ensure we have at least 3 products with valid data
+    if (!homepageItems || homepageItems.length < 3) {
+      return (
+        <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-4">
+          <div className="text-neutral-400 text-center py-12">
+            Featured products coming soon...
+          </div>
+        </section>
+      );
+    }
 
-  const [firstProduct, secondProduct, thirdProduct] = homepageItems;
+    const [firstProduct, secondProduct, thirdProduct] = homepageItems;
 
-  return (
-    <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 lg:max-h-[calc(100vh-200px)]">
-      <ThreeItemGridItem size="full" item={firstProduct} priority={true} />
-      <ThreeItemGridItem size="half" item={secondProduct} priority={true} />
-      <ThreeItemGridItem size="half" item={thirdProduct} />
-    </section>
-  );
+    // Additional check to ensure all products exist
+    if (!firstProduct || !secondProduct || !thirdProduct) {
+      return (
+        <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-4">
+          <div className="text-neutral-400 text-center py-12">
+            Featured products coming soon...
+          </div>
+        </section>
+      );
+    }
+
+    return (
+      <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2 lg:max-h-[calc(100vh-200px)]">
+        <ThreeItemGridItem size="full" item={firstProduct} priority={true} />
+        <ThreeItemGridItem size="half" item={secondProduct} priority={true} />
+        <ThreeItemGridItem size="half" item={thirdProduct} />
+      </section>
+    );
+  } catch (error) {
+    console.error('Error in ThreeItemGrid:', error);
+    return (
+      <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-4">
+        <div className="text-neutral-400 text-center py-12">
+          Featured products coming soon...
+        </div>
+      </section>
+    );
+  }
 }
