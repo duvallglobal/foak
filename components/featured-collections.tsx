@@ -71,7 +71,7 @@ export async function FeaturedCollections() {
                 className="group relative overflow-hidden rounded-lg border border-neutral-700 transition-all duration-300 hover:border-[#00d4ff] hover:shadow-lg hover:shadow-[#00d4ff]/20 aspect-square"
               >
                 <div className="w-full h-full overflow-hidden bg-neutral-800">
-                  {featuredProduct.featuredImage && (
+                  {featuredProduct && featuredProduct.featuredImage && (
                     <GridTileImage
                       alt={collection.title}
                       src={featuredProduct.featuredImage.url}
