@@ -33,8 +33,27 @@ export async function FeaturedCollections() {
     // Filter out collections without products and ensure type safety
     const validCollections = collectionsWithProducts.filter(
       (item): item is { collection: any; products: any[]; featuredProduct: any } => 
-        item !== null && item.featuredProduct !== undefined
+        item !== null && item.featuredProduct !== undefined && item.collection !== undefined
     );
+
+    // Check if we have valid collections to display
+    if (validCollections.length === 0) {
+      return (
+        <section className="w-full bg-[#1a1a1a]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div className="mb-8 md:mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Shop By Category</h2>
+              <p className="text-neutral-400 text-sm md:text-base">Browse our curated collections of amazing finds</p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
+              <div className="text-neutral-400 text-sm col-span-full text-center py-12">
+                Collections coming soon...
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
 
     return (
       <section className="w-full bg-[#1a1a1a]">
