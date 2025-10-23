@@ -4,6 +4,7 @@ import FooterMenu from 'components/layout/footer-menu';
 import LogoSquare from 'components/logo-square';
 import { getMenu } from 'lib/shopify';
 import { Suspense } from 'react';
+import NewsletterSignup from 'components/newsletter-signup';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
@@ -102,6 +103,9 @@ export default async function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Newsletter at the bottom */}
+        <NewsletterSignup />
 
         {/* Bottom footer */}
         <div className="border-t border-neutral-700 pt-6 sm:pt-8">

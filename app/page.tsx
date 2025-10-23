@@ -3,7 +3,6 @@ import ErrorBoundary from 'components/error-boundary';
 import { FeaturedCollections } from 'components/featured-collections';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import { HeroBanner } from 'components/hero-banner';
-import Footer from 'components/layout/footer';
 import { Suspense } from 'react';
 
 export const metadata = {
@@ -18,17 +17,11 @@ export default function HomePage() {
   return (
     <>
       <HeroBanner />
-      
-      {/* Featured Collections by Category */}
-      <ErrorBoundary componentName="FeaturedCollections">
-        <Suspense fallback={<div className="h-96 bg-[#1a1a1a]" />}>
-          <FeaturedCollections />
-        </Suspense>
-      </ErrorBoundary>
 
-      {/* Featured Finds */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="mb-12">
+
+      {/* Latest Treasures closer to hero */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="mb-10">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">Latest Treasures</h2>
           <p className="text-neutral-400">New items added weekly from auctioned storage units</p>
         </div>
@@ -37,6 +30,13 @@ export default function HomePage() {
         </ErrorBoundary>
       </section>
 
+      {/* Featured Collections by Category */}
+      <ErrorBoundary componentName="FeaturedCollections">
+        <Suspense fallback={<div className="h-96 bg-[#1a1a1a]" />}>
+          <FeaturedCollections />
+        </Suspense>
+      </ErrorBoundary>
+
       {/* Carousel */}
       <section className="py-12 px-4 sm:px-6 lg:px-8">
         <ErrorBoundary componentName="Carousel">
@@ -44,7 +44,6 @@ export default function HomePage() {
         </ErrorBoundary>
       </section>
 
-      <Footer />
     </>
   );
 }

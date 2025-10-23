@@ -83,7 +83,7 @@ export async function FeaturedCollections() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col items-end justify-end p-2 sm:p-3">
                   <div className="w-full text-right">
                     <h3 className="text-xs sm:text-sm font-bold text-white mb-0.5 line-clamp-2">{collection.title}</h3>
-                    <p className="text-xs text-neutral-300">{products.length} items</p>
+                    <p className="text-xs text-neutral-300">{products.length} {products.length === 1 ? 'item' : 'items'}</p>
                   </div>
                 </div>
               </Link>

@@ -18,27 +18,33 @@ export function HeroBanner() {
 
       {/* Content */}
       <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
+        {/* Elevated tagline */}
+        <p className="text-xs sm:text-sm md:text-base text-[#00d4ff] tracking-wide uppercase mb-3 sm:mb-4 animate-fade-in">
+          Treasure hunting made simple — West Point, GA
+        </p>
+
         {/* Main headline with animation */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-tight tracking-tight animate-fade-in">
-          Uncommon Finds.
+          We find the deals.
           <br />
           <span className="bg-gradient-to-r from-[#00d4ff] via-[#00a8cc] to-[#33e0ff] bg-clip-text text-transparent animate-slide-up">
-            Unexpected Value.
+            You find the steals.
           </span>
         </h1>
 
         {/* Subheadline with personality */}
         <p className="text-base sm:text-lg md:text-xl text-neutral-300 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          Every week brings fresh treasures discovered in auctioned storage units. Fashion, electronics, furniture, collectibles—the hunt never stops.
+          Storage auctions → your home. Real finds, real prices. New drops weekly—fashion, electronics, furniture, collectibles, and the occasional oddity—right here in West Point, GA.
         </p>
 
-        {/* CTA Button with enhanced effects */}
-        <button 
+        {/* CTA Button becomes a link */}
+        <a 
+          href="/search"
           className="btn-accent text-base sm:text-lg font-bold transition-all duration-300 animate-slide-up"
           style={{ animationDelay: '0.3s' }}
         >
-          Explore The Latest Finds
-        </button>
+          Shop New Arrivals
+        </a>
 
         {/* Decorative elements - featured categories with glass morphism */}
         <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-neutral-700 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">

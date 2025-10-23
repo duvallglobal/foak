@@ -2,6 +2,7 @@ import { CartProvider } from 'components/cart/cart-context';
 import ClientOnly from 'components/client-only';
 import ErrorBoundary from 'components/error-boundary';
 import { Navbar } from 'components/layout/navbar';
+import Footer from 'components/layout/footer';
 import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
 import { getCart } from 'lib/shopify';
@@ -47,6 +48,7 @@ export default async function RootLayout({
                 <WelcomeToast />
               </ClientOnly>
             </main>
+            <Footer />
           </CartProvider>
         </ErrorBoundary>
       </body>

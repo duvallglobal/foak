@@ -20,9 +20,8 @@ export function GridTileImage({
   return (
     <div
       className={clsx(
-        'group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black',
+        'group relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-black',
         {
-          relative: label,
           'border-2 border-blue-600': active,
           'border-neutral-200 dark:border-neutral-800': !active
         }
@@ -36,6 +35,14 @@ export function GridTileImage({
           {...props}
         />
       ) : null}
+
+      {/* Inventory badge */}
+      {active === false ? (
+        <span className="absolute top-2 left-2 rounded bg-black/70 text-white text-xs px-2 py-1">
+          Sold out
+        </span>
+      ) : null}
+
       {label ? (
         <Label
           title={label.title}

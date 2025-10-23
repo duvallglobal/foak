@@ -15,6 +15,7 @@ export default function ProductGridItems({ products }: { products: Product[] }) 
           >
             <GridTileImage
               alt={product.title}
+              active={product.availableForSale}
               label={{
                 title: product.title,
                 amount: product.priceRange.maxVariantPrice.amount,
