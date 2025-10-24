@@ -1,9 +1,13 @@
-import Grid from 'components/grid';
-import { GridTileImage } from 'components/grid/tile';
-import { Product } from 'lib/shopify/types';
-import Link from 'next/link';
+import Grid from "components/grid";
+import { GridTileImage } from "components/grid/tile";
+import { Product } from "lib/shopify/types";
+import Link from "next/link";
 
-export default function ProductGridItems({ products }: { products: Product[] }) {
+export default function ProductGridItems({
+  products,
+}: Readonly<{
+  products: Product[];
+}>) {
   return (
     <>
       {products.map((product) => (
@@ -15,11 +19,11 @@ export default function ProductGridItems({ products }: { products: Product[] }) 
           >
             <GridTileImage
               alt={product.title}
-              active={product.availableForSale}
+              available={product.availableForSale}
               label={{
                 title: product.title,
                 amount: product.priceRange.maxVariantPrice.amount,
-                currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                currencyCode: product.priceRange.maxVariantPrice.currencyCode,
               }}
               src={product.featuredImage?.url}
               fill

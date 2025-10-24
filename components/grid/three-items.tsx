@@ -1,20 +1,24 @@
-import { GridTileImage } from 'components/grid/tile';
-import { getCollectionProducts, getProducts } from 'lib/shopify';
-import type { Product } from 'lib/shopify/types';
-import Link from 'next/link';
+import { GridTileImage } from "components/grid/tile";
+import { getCollectionProducts, getProducts } from "lib/shopify";
+import type { Product } from "lib/shopify/types";
+import Link from "next/link";
 
 function ThreeItemGridItem({
   item,
   size,
-  priority
-}: {
+  priority,
+}: Readonly<{
   item: Product;
-  size: 'full' | 'half';
+  size: "full" | "half";
   priority?: boolean;
-}) {
+}>) {
   return (
     <div
-      className={size === 'full' ? 'md:col-span-4 md:row-span-2' : 'md:col-span-2 md:row-span-1'}
+      className={
+        size === "full"
+          ? "md:col-span-4 md:row-span-2"
+          : "md:col-span-2 md:row-span-1"
+      }
     >
       <Link
         className="relative block aspect-square h-full w-full"
@@ -25,16 +29,18 @@ function ThreeItemGridItem({
           src={item.featuredImage.url}
           fill
           sizes={
-            size === 'full' ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 33vw, 100vw'
+            size === "full"
+              ? "(min-width: 768px) 66vw, 100vw"
+              : "(min-width: 768px) 33vw, 100vw"
           }
           priority={priority}
           alt={item.title}
-          active={item.availableForSale}
+          available={item.availableForSale}
           label={{
-            position: size === 'full' ? 'center' : 'bottom',
-            title: item.title as string,
+            position: size === "full" ? "center" : "bottom",
+            title: item.title,
             amount: item.priceRange.maxVariantPrice.amount,
-            currencyCode: item.priceRange.maxVariantPrice.currencyCode
+            currencyCode: item.priceRange.maxVariantPrice.currencyCode,
           }}
         />
       </Link>
@@ -50,10 +56,13 @@ export async function ThreeItemGrid() {
     try {
       // Collections that start with `hidden-*` are hidden from the search page.
       homepageItems = await getCollectionProducts({
-        collection: 'hidden-homepage-featured-items'
+        collection: "hidden-homepage-featured-items",
       });
     } catch (error) {
-      console.warn('Featured items collection not found, using regular products');
+      console.warn(
+        "Featured items collection not found, using regular products:",
+        error
+      );
       // Fallback to getting any products
       const allProducts = await getProducts({});
       homepageItems = allProducts || [];
@@ -106,7 +115,7 @@ export async function ThreeItemGrid() {
       </section>
     );
   } catch (error) {
-    console.error('Error in ThreeItemGrid:', error);
+    console.error("Error in ThreeItemGrid:", error);
     return (
       <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-4">
         <div className="text-neutral-400 text-center py-12">
